@@ -21,8 +21,21 @@
       key: "/org/gnome/desktop/background/picture-uri"
       value: "'file:///usr/share/backgrounds/ansible-wallpaper.jpg'"
 
+  - name: set wallpaper dark
+    become_user: michael
+    dconf:
+      key: "/org/gnome/desktop/background/picture-uri-dark"
+      value: "'file:///usr/share/backgrounds/ansible-wallpaper.jpg'"
+
   - name: set wallpaper position
     become_user: michael
     dconf:
       key: "/org/gnome/desktop/background/picture-options"
       value: "'zoom'"
+
+  - name:  copy .bashrc file
+    copy:
+      src: files/bashrc
+      dest: /home/michael/.bashrc
+      owner: michael
+      group: michael
