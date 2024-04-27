@@ -4,9 +4,99 @@
   become: true
 
   tasks:
-  - name: install micro
+  - name: install packages
     package:
-      name: micro
+      name:
+        - acpi
+        - acpi_call
+        - acpi_call-lts
+        - acpid
+        - alsa-utils
+        - amd-ucode
+        - ansible
+        - ansible-core
+        - archlinux-contrib
+        - avahi
+        - base-devel
+        - bash-completion
+        - bluez
+        - bluez-utils
+        - bridge-utils
+        - cheese
+        - cups
+        - dconf-editor
+        - dialog
+        - dmidecode
+        - dnsmasq
+        - dosfstools
+        - efibootmgr
+        - eog
+        - ffmpegthumbnailer
+        - firefox
+        - firewalld
+        - gdm
+        - gedit
+        - gimp
+        - gnome
+        - gnome-browser-connector
+        - gnome-terminal
+        - gnome-themes-extra
+        - gnome-tweaks
+        - gst-libav
+        - gst-plugins-ugly
+        - htop
+        - inter-font
+        - inxi
+        - libdvdcss
+        - libreoffice-fresh
+        - linux-firmware
+        - linux-lts
+        - linux-lts-headers
+        - lsof
+        - mtools
+        - neofetch
+        - nfs-utils
+        - noto-fonts
+        - openbsd-netcat
+        - os-prober
+        - pacman-contrib
+        - pipewire
+        - pipewire-alsa
+        - pipewire-jack
+        - pipewire-pulse
+        - reflector
+        - rhythmbox
+        - rsync
+        - sassc
+        - simplescreenrecorder
+        - terminus-font
+        - tlp
+        - ttf-anonymous-pro
+        - ttf-bitstream-vera
+        - ttf-cascadia-code
+        - ttf-croscore
+        - ttf-dejavu
+        - ttf-droid
+        - ttf-fantasque-sans-mono
+        - ttf-fira-code
+        - ttf-fira-mono
+        - ttf-gentium-plus
+        - ttf-hack
+        - ttf-inconsolata
+        - ttf-jetbrains-mono
+        - ttf-junicode
+        - ttf-liberation
+        - ttf-linux-libertine
+        - ttf-monofur
+        - ttf-opensans
+        - ttf-roboto
+        - virt-manager
+        - vlc
+        - wireguard-tools
+        - xdg-user-dirs
+        - xdg-utils
+        - xorg
+        - yt-dlp
 
   - name: copy wallpaper file
     copy:
