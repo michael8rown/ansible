@@ -1,14 +1,12 @@
 #!/bin/sh
 
-echo "What would you like your new hostname to be?"
+read -p "What would you like your new hostname to be?  " myhostname
 
-read myhostname
-
-echo Setting new host name to $myhostname
+echo "Setting new host name to ${myhostname}"
 echo $myhostname >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
-echo "127.0.1.1 $myhostname" >> /etc/hosts
+echo "127.0.1.1 ${myhostname}" >> /etc/hosts
 
 sleep 1
 
