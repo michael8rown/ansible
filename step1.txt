@@ -1,0 +1,33 @@
+# setfont ter-132b
+# cat /sys/firmware/efi/fw_platform_size
+
+If the command returns 64, then system is booted in UEFI mode and has a 64-bit x64 UEFI. If the command returns 32, then system is booted in UEFI mode and has a 32-bit IA32 UEFI; while this is supported, it will limit the boot loader choice to systemd-boot and GRUB. If the file does not exist, the system may be booted in BIOS (or CSM) mode. If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your motherboard's manual. 
+
+# ping -c 3 archlinux.org
+
+# timedatectl
+
+# cfdisk /dev/the_disk_to_be_partitioned
+
+Mount point on the installed system	Partition	Partition type	Suggested size
+/boot1	/dev/efi_system_partition	EFI system partition	1 GiB
+[SWAP]	/dev/swap_partition	Linux swap	At least 4 GiB
+/	/dev/root_partition	Linux x86-64 root (/)	Remainder of the device. At least 23–32 GiB.
+
+
+# mkfs.fat -F 32 /dev/efi_system_partition
+# mkfs.ext4 /dev/root_partition
+# mkswap /dev/swap_partition
+
+# mount /dev/root_partition /mnt
+# mount --mkdir /dev/efi_system_partition /mnt/boot
+# swapon /dev/swap_partition
+
+# pacstrap -K /mnt linux-lts linux-lts-headers linux-firmware amd-ucode base base-devel reflector git ansible ansible-core openssh nano which sudo bash-completion man-db
+
+# genfstab -U /mnt >> /mnt/etc/fstab
+# arch-chroot /mnt
+
+
+Continue with step2.sh script
+
