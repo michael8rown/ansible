@@ -9,25 +9,25 @@ If the command returns 64, then system is booted in UEFI mode and has a 64-bit x
 
 # cfdisk /dev/the_disk_to_be_partitioned
 
-Mount point on the installed system	Partition	Partition type	Suggested size
-/boot1	/dev/efi_system_partition	EFI system partition	1 GiB
-[SWAP]	/dev/swap_partition	Linux swap	At least 4 GiB
-/	/dev/root_partition	Linux x86-64 root (/)	Remainder of the device. At least 23–32 GiB.
+Mount point on the installed system 	Partition 	Partition type 	Suggested size
+/boot1 	/dev/efi_system_partition 	EFI system partition 	1 GiB
+[SWAP] 	/dev/swap_partition 	Linux swap 	At least 4 GiB
+/ 	/dev/root_partition 	Linux x86-64 root (/) 	Remainder of the device. At least 23–32 GiB.
 
 
-# mkfs.fat -F 32 /dev/efi_system_partition
 # mkfs.ext4 /dev/root_partition
 # mkswap /dev/swap_partition
+# mkfs.fat -F 32 /dev/efi_system_partition
 
 # mount /dev/root_partition /mnt
 # mount --mkdir /dev/efi_system_partition /mnt/boot
 # swapon /dev/swap_partition
 
-# pacstrap -K /mnt linux-lts linux-lts-headers linux-firmware amd-ucode base base-devel reflector git ansible ansible-core openssh nano which sudo bash-completion man-db
+pacstrap -K /mnt linux-lts linux-lts-headers linux-firmware amd-ucode base base-devel reflector git ansible ansible-core openssh nano which sudo bash-completion man-db
 
 # genfstab -U /mnt >> /mnt/etc/fstab
 # arch-chroot /mnt
 
 
-Continue with step2.sh script
+Continue with arch-install.sh script
 
