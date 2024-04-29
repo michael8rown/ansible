@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/bin/bash
+
+set -e -o pipefail
+
+echo "Disabling Wayland ..."
+sed -i 's/#WaylandEnable/WaylandEnable/' /etc/gdm/custom.conf
 
 echo
 echo "Changing root's password ..." 
@@ -25,5 +30,6 @@ echo "%wheel ALL=(ALL:ALL) ALL" | (EDITOR="tee -a" visudo)
 
 echo
 echo "Installation should be complete."
+
 
 

@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+set -e -o pipefail
 
 read -p "What would you like your new hostname to be?  " myhostname
 

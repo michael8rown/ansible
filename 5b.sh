@@ -1,7 +1,11 @@
-#!/bin/sh
+#!/bin/bash
+
+set -e -o pipefail
 
 echo "Installing systemd boot ..."
 bootctl install
+
+sleep 1
 
 echo "default arch-lts.conf
 timeout 5
