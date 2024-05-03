@@ -29,19 +29,6 @@
       set_fact:
         extensions_to_install: "{{ extensions | dict2items | map(attribute='value') | list }}"
 
-#    - name: "loop through list of shell extensions"
-#      ansible.builtin.debug:
-#        msg: "Extension: {{ item }}"
-#      with_items: "{{ extensions_to_install }}"
-
-#    - name: Enable extensions
-#      ansible.builtin.command: gnome-extensions enable {{ item }}
-#      become_user: "{{ gnome_user }}"
-#      with_items: "{{ extensions_to_install }}"
-#      ignore_errors: true
-
-#     ^ ^ ^ ^ ^ ^ This totally works!!!!!  ^ ^ ^ ^ ^ ^ 
-
     - name: Get GNOME Shell version
       command: "gnome-shell --version"
       register: gnome_shell_version
@@ -51,10 +38,6 @@
       set_fact:
         gnome_shell_major_version: "{{ gnome_shell_version.stdout.split()[-1].split('.')[0] }}"
 
-#    - name: Debug GNOME Shell major version
-#      debug:
-#        msg: "Gnome shell major version is {{ gnome_shell_major_version }}"
-
     - name: Install and enable GNOME Shell extensions
       include_role:
         name: install_extensions
@@ -63,21 +46,16 @@
         user: "{{ gnome_user }}"
         shell_version: "{{ gnome_shell_major_version }}"
 
-    - name: Restart Gnome Shell to ensure all extensions are visible
-      become_user: "{{ gnome_user }}"
-      ansible.builtin.command:
-        cmd: busctl --user call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s 'Meta.restart("Restarting…")'
-#      when: unzipped_extension.changed and not customize_gnome__skip_restart_gnome_shell
-
     - name: Create gschemas.compiled for blur my shell
       command: /usr/bin/glib-compile-schemas .
       become_user: "{{ gnome_user }}"
       args:
-        chdir: "/home/{{ gnome_user }}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
-        creates: "/home/{{ gnome_user }}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas/gschemas.compiled"
+        chdir: /home/michael/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas
+        creates: /home/michael/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas/gschemas.compiled
 
     - name: Enable extensions
-      with_items: "{{ extensions_to_install }}"
-      command: gnome-extensions enable {{ item }}
       become_user: "{{ gnome_user }}"
-      ignore_errors: true
+      dconf:
+        key: "/org/gnome/shell/enabled-extensions"
+        value: "{{ ['user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'Move_Clock@rmy.pobox.com', 'logomenu@aryan_k', 'blur-my-shell@aunetx'] }}"
+        state: present
