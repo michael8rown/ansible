@@ -60,10 +60,12 @@
         value: "{{ ['user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'Move_Clock@rmy.pobox.com', 'logomenu@aryan_k', 'blur-my-shell@aunetx'] }}"
         state: present
 
-    - name: Enable extensions
-      command: gdbus call --session --dest org.gnome.Shell.Extensions --object-path /org/gnome/Shell/Extensions --method org.gnome.Shell.Extensions.InstallRemoteExtension "{{ item }}"
-      become_user: "{{ gnome_user }}"
-      with_items: "{{ extensions_to_install }}"
-      ignore_errors: true
+    #  You can stop here and have extensions enabled after you logout/login. Or you can continue
+    #  with the next task, which will prompt you for each extension. Not what I want.
 
-      #  ^ ^ ^   This works, but it throws a prompt for each extension to install. Not what I want.
+#    - name: Enable extensions
+#      command: gdbus call --session --dest org.gnome.Shell.Extensions --object-path /org/gnome/Shell/Extensions --method org.gnome.Shell.Extensions.InstallRemoteExtension "{{ item }}"
+#      become_user: "{{ gnome_user }}"
+#      with_items: "{{ extensions_to_install }}"
+3      ignore_errors: true
+
