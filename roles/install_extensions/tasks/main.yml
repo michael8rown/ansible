@@ -1,0 +1,51 @@
+- name: Debug
+  debug:
+    msg: "extension name {{ item }} will be installed for {{ user }} under shell version {{ shell_version }}"
+
+- name: Set Extension name
+  set_fact:
+    extension_name: "{{ item }}"
+
+- name: Get available extension versions
+  uri:
+    url: "https://extensions.gnome.org/extension-info/?uuid={{ extension_name }}&shell_version={{ shell_version }}"
+    method: GET
+    return_content: yes
+  register: extension_info
+
+- name: Extract shell_version_map
+  set_fact:
+    shell_version_map: "{{ extension_info.json.shell_version_map }}"
+    
+- name: Get extension version based on GNOME major version
+  set_fact:
+    extension_version_tag: "{{ shell_version_map[shell_version].pk }}"
+  when: gnome_shell_major_version in shell_version_map.keys()
+
+- name: Download the latest extension
+  uri:
+    url: "https://extensions.gnome.org/download-extension/{{ extension_name }}.shell-extension.zip?version_tag={{ extension_version_tag }}"
+    method: GET
+    dest: "/tmp/{{ extension_name }}-extension.zip"
+  become_user: "{{ user }}"
+  register: download_result
+
+- name: Ensure download success
+  fail:
+    msg: "Failed to download {{ extension_name }} extension version {{ extension_version }}"
+  when: download_result.status != 200
+
+- name: Ensure destination directory exists
+  file:
+    path: "/home/{{ user }}/.local/share/gnome-shell/extensions/{{ extension_name }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: '0755'
+
+- name: Extract the extension
+  unarchive:
+    src: "/tmp/{{ extension_name }}-extension.zip"
+    dest: "/home/{{ user }}/.local/share/gnome-shell/extensions/{{ extension_name }}"
+    remote_src: yes
+  become_user: "{{ user }}"
