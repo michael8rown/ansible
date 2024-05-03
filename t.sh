@@ -73,8 +73,8 @@
       command: /usr/bin/glib-compile-schemas .
       become_user: "{{ gnome_user }}"
       args:
-        chdir: /home/michael/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas
-        creates: /home/michael/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas/gschemas.compiled
+        chdir: "/home/{{ gnome_user }}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
+        creates: "/home/{{ gnome_user }}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas/gschemas.compiled"
 
     - name: Enable extensions
       with_items: "{{ extensions_to_install }}"
