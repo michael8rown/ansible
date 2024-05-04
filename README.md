@@ -1,25 +1,25 @@
 # Arch Linux Installation and Configuration
 
-This is a collection of BASH and Ansible scripts to automate the installation of Arch Linux in UEFI mode, install/enable GNOME extensions, install WhiteSur icons, and set a number of dconf settings the way I like them.
+This is a collection of BASH and Ansible scripts to automate the installation of [Arch Linux](https://archlinux.org/) in UEFI mode, install/enable GNOME extensions, install WhiteSur icons, and set a number of dconf settings the way I like them.
 
 This is my first attempt at reproducing my NixOS experience in Arch. It isn't quite as flawless, but it's very close.
 
 ### Prerequisites
 
-This project assumes that you have already downloaded [Arch Linux](https://archlinux.org/) and have it ready to go on a thumb drive or some other medium from which you can install it.
+This project assumes that you have already downloaded Arch and have it ready to go on a thumb drive or some other medium from which you can install it.
 
 It also assumes that you have a better-than-beginner understanding of disk partitioning (I prefer `cfdisk`), especially if you are planning to use the project to install Arch alongside another distribution. **I take no responsibility for loss of data.** I have not tested this project in a dual-boot situation so I cannot vouch for its reliability in that regard.
 
 ### Step 1: Pre-installation tasks
 
-The Arch iso does not ship with `git`. Therefore, the first task is to install it with
+The first step is to boot the installation iso. Once booted, you will need to install `git` because the iso does not ship with it.
 
 ```
 pacman-key --init
 sudo pacman -Sy git
 ```
 
-Once that's complete, clone this repo with
+Once installed, clone this repo with
 
 ```
 git clone https://github.com/michael8rown/archinstall.git
@@ -39,6 +39,8 @@ You are also instructed to format the disk using (for example) `cfdisk /dev/vda`
 Before continuing, run `lsblk` and note the names of the partitions you created at the end of **Step 1**. The output will look something like this:
 
 ```
+$ lsblk
+
 NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
 loop0    7:0    0 788.2M  1 loop /run/archiso/airootfs
 sr0     11:0    1 955.3M  0 rom  /run/archiso/bootmnt
@@ -64,7 +66,7 @@ Once you've collected this information, run `2_base_install.sh` to perform some 
 
 Inside the chroot environment, `cd` into the `archinstall` directory and run `3_main_install.sh`. This will
 
-* install all the packages I like
+* install all the packages I like (you can edit `apps.txt` to add/delete packages of your choice: NOTE: some of the tasks in these scripts and some of the services that are activated depend on certain packages. For example, this script enables NetworkManager. If you choose not to use NetworkManager, the script will fail.)
 * enable all the services I use
 * disable Wayland (is Wayland ***ever*** going to figure out how to handle cursors?)
 * enable syntax highlighting in `nano`
@@ -88,3 +90,6 @@ The last step is to reboot again, after which your environment should be set up 
 - [x] Create a separate file containing a list of all the packages I install in `3_main_install.sh`. That way, I can add/delete packages without needing to touch the actual script.
 
 - [ ] Write some Ansible templates to set up and activate some local services I've written
+
+- [ ] Automate disk partitioning? Can that even be done in `cfdisk`, or would I have to revert to something simpler, like `fdisk`?
+
