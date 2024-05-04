@@ -1,0 +1,17 @@
+lsblk
+
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0    7:0    0 788.2M  1 loop /run/archiso/airootfs
+sr0     11:0    1 955.3M  0 rom  /run/archiso/bootmnt
+vda    254:0    0    20G  0 disk 
+├─vda1 254:1    0     1G  0 part 
+├─vda2 254:2    0    17G  0 part 
+└─vda3 254:3    0     2G  0 part 
+
+blkid 
+
+/dev/sr0: BLOCK_SIZE="2048" UUID="2024-04-01-17-57-21-00" LABEL="ARCH_202404" TYPE="iso9660" PTUUID="e3fe56f2" PTTYPE="dos"
+/dev/loop0: BLOCK_SIZE="1048576" TYPE="squashfs"
+/dev/vda2: PARTUUID="fbcbb979-b4d1-4f57-8d25-94b1292b82cf"
+/dev/vda3: PARTUUID="1f37c106-aa26-4f01-8143-b0db507f66c2"
+/dev/vda1: PARTUUID="109c859d-5b88-45dc-8a1c-0002546c104e"

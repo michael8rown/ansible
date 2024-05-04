@@ -4,6 +4,12 @@ This is a collection of BASH and Ansible scripts to automate the installation of
 
 This is my first attempt at reproducing my NixOS experience in Arch. It isn't quite as flawless, but it's very close.
 
+### Prerequisites
+
+This project assumes that you have already downloaded [Arch Linux](https://archlinux.org/) and have it ready to go on a thumb drive or some other medium from which you can install it.
+
+It also assumes that you have a better-than-beginner understanding of disk partitioning (I prefer `cfdisk`), especially if you are planning to use the project to install Arch alongside another distribution. **I take no responsibility for loss of data.** I have not tested this project in a dual-boot situation so I cannot vouch for its reliability in that regard.
+
 ### Step 1: Pre-installation tasks
 
 The Arch iso does not ship with `git`. Therefore, the first task is to install it with
@@ -23,7 +29,7 @@ git clone https://github.com/michael8rown/archinstall.git
 
 You are also instructed to format the disk using (for example) `cfdisk /dev/vda`, and you are offered a recommended structure. The pattern I always use is:
 
-* select `gpt` as the format
+* select `gpt` as the label
 * create an EFI boot device at `/dev/vda1`
 * create a root device at `/dev/vda2`
 * and create a swap device at `/dev/vda3`
@@ -33,10 +39,16 @@ You are also instructed to format the disk using (for example) `cfdisk /dev/vda`
 Before continuing, run `lsblk` and note the names of the partitions you created at the end of **Step 1**. The output will look something like this:
 
 ```
-example
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0    7:0    0 788.2M  1 loop /run/archiso/airootfs
+sr0     11:0    1 955.3M  0 rom  /run/archiso/bootmnt
+vda    254:0    0    20G  0 disk 
+├─vda1 254:1    0     1G  0 part 
+├─vda2 254:2    0    17G  0 part 
+└─vda3 254:3    0     2G  0 part 
 ```
 
-Make note of device names you've assigned becuase you will be asked for those details when you run `2_base_install.sh`. Using the example above, 
+Make note of device names you've assigned because you will be asked for those details when you run `2_base_install.sh`. Using the examples above, 
 
 * `/dev/vda1` is the `boot` parition
 * `/dev/vda2` is the `root` parition
