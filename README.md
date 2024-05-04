@@ -9,6 +9,7 @@ This is my first attempt at reproducing my NixOS experience in Arch. It isn't qu
 The Arch iso does not ship with git. Therefore, the first task is to install it with
 
 ```
+pacman-key --init
 sudo pacman -Sy git
 ```
 
@@ -20,9 +21,9 @@ git clone https://github.com/michael8rown/ansible.git
 
 ### Step 1: Pre-installation tasks
 
-`1_pre_install.sh` does some of the usual housekeeping I perform before beginning, such as checking internet connection and running `timedatectl`. Checking internet is actually unncessary because, if you didn't have an internet connection, you would not have been able to install `git` above.
+`1_pre_install.sh` does some of the usual housekeeping I perform before beginning, such as checking internet connection and running `timedatectl`. (NOTE: Checking internet is actually unncessary; if you don't have an internet connection, you wouldn't be able to install `git` above.)
 
-You are also instructed to format the disk using `cfdisk /dev/disk`, and you are given a recommended structure. The pattern I always use is
+You are also instructed to format the disk using `cfdisk /dev/disk`, and you are offered a recommended structure. The pattern I always use is
 
 * an EFI boot device at `/dev/vda1`
 * a root device at `/dev/vda2`
@@ -42,7 +43,7 @@ Inside the chroot environment, `cd` into the `ansible` directory and run `3_main
 
 * install all the packages I like
 * enable all the services I use
-* disable Wayland (is Wayland EVER going to figure out how to handle cursors?)
+* disable Wayland (is Wayland EVER going to figure out how to handle cursors???)
 * set the root password
 * create a new user
 * set that user's password
@@ -56,7 +57,7 @@ Once you log in, `cd` into the `ansible` directory and run `4_post_install.sh`, 
 
 ### Final step
 
-The last step is to reboot again, after which your environment should be set up exactly as defined in the scripts. Enjoy :-)
+The last step is to reboot again, after which your environment should be set up exactly as defined in the scripts. Enjoy!
 
 ### Todo
 
