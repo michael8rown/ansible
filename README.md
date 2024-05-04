@@ -43,7 +43,8 @@ Inside the chroot environment, `cd` into the `ansible` directory and run `3_main
 
 * install all the packages I like
 * enable all the services I use
-* disable Wayland (is Wayland EVER going to figure out how to handle cursors???)
+* disable Wayland (is Wayland ***ever*** going to figure out how to handle cursors?)
+* enable syntax highlighting in `nano`
 * set the root password
 * create a new user
 * set that user's password
@@ -61,6 +62,6 @@ The last step is to reboot again, after which your environment should be set up 
 
 ### Todo
 
-- [ ] Create a separate file containing a list of all the packages I install in `3_main_install.sh`. That way, I can add/delete packages without needing to touch the actual script.
+- [x] Create a separate file containing a list of all the packages I install in `3_main_install.sh`. That way, I can add/delete packages without needing to touch the actual script.
 
 - [ ] Write some Ansible templates to set up and activate some local services I've written

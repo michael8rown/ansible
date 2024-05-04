@@ -40,4 +40,6 @@ while [ $secs -gt 0 ]; do
    : $((secs--))
 done
 
+echo
+
 arch-chroot /mnt
