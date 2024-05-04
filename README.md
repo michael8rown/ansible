@@ -4,7 +4,7 @@ This is a collection of BASH and Ansible scripts to automate the installation of
 
 This is my first attempt at reproducing my NixOS experience in Arch. It isn't quite as flawless, but it's very close.
 
-## Before you begin
+### Before you begin
 
 The Arch iso does not ship with git. Therefore, the first task is to install it with
 
@@ -18,13 +18,13 @@ Once that's complete, clone this repo with
 git clone https://www.github.com/michael8rown/ansible
 ```
 
-## Step 1: Pre-installation tasks
+### Step 1: Pre-installation tasks
 
 `1_pre_install.sh` does some of the usual housekeeping I perform before beginning, such as checking internet connection and running `timedatectl`. Checking internet is actually unncessary because, if you didn't have an internet connection, you would not have been able to install `git` above.
 
 You are also instructed to format the disk using `cfdisk /dev/disk`. You'll need to create an EFI boot device, a root device, and a swap device.
 
-## Step 2: Base Installation
+### Step 2: Base Installation
 
 `2_install.sh` performs some pre-chroot tasks, such as
 
@@ -32,7 +32,7 @@ You are also instructed to format the disk using `cfdisk /dev/disk`. You'll need
 * running `pacstrap`
 * chrooting into /mnt
 
-## Step 3: Main Installation
+### Step 3: Main Installation
 
 Inside the chroot environment, run `3_install.sh`. This will
 
@@ -45,15 +45,13 @@ Inside the chroot environment, run `3_install.sh`. This will
 
 Once this step is complete, you must reboot.
 
-## Step 4: Post-installation tasks
+### Step 4: Post-installation tasks
 
-`4_post_install.sh` is an Ansible playbook that configures all the things the way I like them: GNOME extensions, WhiteSur icons, and setting all my desktop preferences.
+`4_after_reboot.sh` is an Ansible playbook that configures all the things the way I like them: GNOME extensions, WhiteSur icons, and setting all my desktop preferences.
 
-Once this script is complete, you must reboot again. 
+### Final step
 
-## Final step
-
-When you reboot, your environment should be set up exactly as defined in the scripts.
+The last step is to reboot again, after which your environment should be set up exactly as defined in the scripts.
 
 Enjoy :-)
 
@@ -61,3 +59,4 @@ Enjoy :-)
 
 I would like to make a separate file containing a list of all the packages I install in `3_install.sh`. That way, I can add/delete packages without needing to touch the actual script.
 
+I would like to write some Ansible templates to set up and activate some local services I've written
