@@ -6,7 +6,7 @@ This is my first attempt at reproducing my NixOS experience in Arch. It isn't qu
 
 ### Step 1: Pre-installation tasks
 
-The Arch iso does not ship with git. Therefore, the first task is to install it with
+The Arch iso does not ship with `git`. Therefore, the first task is to install it with
 
 ```
 pacman-key --init
@@ -16,7 +16,7 @@ sudo pacman -Sy git
 Once that's complete, clone this repo with
 
 ```
-git clone https://github.com/michael8rown/ansible.git
+git clone https://github.com/michael8rown/archinstall.git
 ```
 
 `1_pre_install.sh` does some of the usual housekeeping I perform before beginning, such as checking internet connection and running `timedatectl`. (NOTE: Checking internet is actually unncessary; if you don't have an internet connection, you wouldn't be able to install `git` above.)
@@ -37,7 +37,7 @@ You are also instructed to format the disk using `cfdisk /dev/disk`, and you are
 
 ### Step 3: Main Installation
 
-Inside the chroot environment, `cd` into the `ansible` directory and run `3_main_install.sh`. This will
+Inside the chroot environment, `cd` into the `archinstall` directory and run `3_main_install.sh`. This will
 
 * install all the packages I like
 * enable all the services I use
@@ -52,7 +52,7 @@ Once this step is complete, you must reboot.
 
 ### Step 4: Post-installation tasks
 
-Once you log in, `cd` into the `ansible` directory and run `4_post_install.sh`, which is an Ansible playbook that configures all the things the way I like them: GNOME extensions, WhiteSur icons, and setting all my desktop preferences.
+Once you log in, `cd` into the `archinstall` directory and run `4_post_install.sh`, which is an Ansible playbook that configures all the things the way I like them: GNOME extensions, WhiteSur icons, and setting all my desktop preferences.
 
 ### Step 5: Reboot
 

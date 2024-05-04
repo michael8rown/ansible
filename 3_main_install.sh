@@ -101,15 +101,15 @@ echo "Adding ${username} to sudoers ..."
 
 echo "%wheel ALL=(ALL:ALL) ALL" | (EDITOR="tee -a" visudo)
 
-echo "Moving ansible files to ${username}'s home directory ..."
-cp -r ../ansible /home/${username}/.
+echo "Moving archinstall files to ${username}'s home directory ..."
+cp -r ../archinstall /home/${username}/.
 
-echo "Updating permissions on ansible folder ..."
-chown -R ${username}:${username} /home/${username}/ansible
+echo "Updating permissions on archinstall folder ..."
+chown -R ${username}:${username} /home/${username}/archinstall
 
 echo
 echo "Success!!"
 echo "Installation should be complete."
 echo "You should now exit the chroot environment, unmount devices, and reboot."
 echo "Once rebooted, run the script called"
-echo "  >>  /home/${username}/ansible/4_after_reboot.sh"
+echo "  >>  /home/${username}/archinstall/4_after_reboot.sh"

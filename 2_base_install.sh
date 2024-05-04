@@ -28,10 +28,10 @@ echo "Generating fstab ..."
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "Copying install scripts to /mnt ..."
-cp -r ../ansible /mnt/.
+cp -r ../archinstall /mnt/.
 
 echo "Base installation is complete."
-echo "Continue installation with /ansible/3_install.sh."
+echo "Continue installation with /archinstall/3_install.sh."
 
 secs=$((10))
 while [ $secs -gt 0 ]; do

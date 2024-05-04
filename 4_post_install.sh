@@ -6,7 +6,7 @@
   gather_facts: yes
 
   vars_files:
-    - ext.yml 
+    - ext.yml
     - vars.yml
     - d.yml
 
