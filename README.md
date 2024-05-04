@@ -1,4 +1,4 @@
-# Ansible for Arch
+# Arch Linux Installation and Configuration
 
 This is a collection of BASH and Ansible scripts to automate the installation of Arch Linux, install/enable GNOME extensions, install WhiteSur icons, and set a number of dconf settings the way I like them.
 
