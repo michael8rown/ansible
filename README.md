@@ -15,7 +15,7 @@ sudo pacman -Sy git
 Once that's complete, clone this repo with
 
 ```
-git clone https://www.github.com/michael8rown/ansible
+git clone https://www.github.com/michael8rown/ansible.git
 ```
 
 ### Step 1: Pre-installation tasks
