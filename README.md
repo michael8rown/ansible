@@ -30,7 +30,7 @@ You are also instructed to format the disk using (for example) `cfdisk /dev/vda`
 
 ### Step 2: Base Installation
 
-Before continuing, run `lsblk` and note the names of the partitions you created at the end of *Step 1*. The output will look something like this:
+Before continuing, run `lsblk` and note the names of the partitions you created at the end of **Step 1**. The output will look something like this:
 
 ```
 example
