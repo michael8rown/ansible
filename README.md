@@ -8,13 +8,15 @@ This is my first attempt at reproducing my NixOS experience in Arch. It isn't qu
 
 The Arch iso does not ship with git. Therefore, the first task is to install it with
 
-```sudo pacman -Sy git```
+```
+sudo pacman -Sy git
+```
 
 Once that's complete, clone this repo with
 
-```git clone https://www.github.com/michael8rown/ansible```
-
-and then proceed with step 1, `1_pre_install.sh`.
+```
+git clone https://www.github.com/michael8rown/ansible
+```
 
 ## Step 1: Pre-installation tasks
 
@@ -24,11 +26,22 @@ You are also instructed to format the disk using `cfdisk /dev/disk`. You'll need
 
 ## Step 2: Base Installation
 
-`2_install.sh` does all the pre-chroot tasks, such as formatting the devices, running `pacstrap`, and then finally chrooting.
+`2_install.sh` performs some pre-chroot tasks, such as
+
+* formatting and mounting the devices
+* running `pacstrap`
+* chrooting into /mnt
 
 ## Step 3: Main Installation
 
-Inside the chroot environment, run `3_install.sh`. This will install all the packages I like, it will enable all the services I use, it will set the root password, it will create a new user and set that user's password, and then it will add that user to sudo.
+Inside the chroot environment, run `3_install.sh`. This will
+
+* install all the packages I like
+* enable all the services I use
+* set the root password
+* create a new user
+* set that user's password
+* add that user to sudo
 
 Once this step is complete, you must reboot.
 
@@ -43,3 +56,8 @@ Once this script is complete, you must reboot again.
 When you reboot, your environment should be set up exactly as defined in the scripts.
 
 Enjoy :-)
+
+## Todo
+
+I would like to make a separate file containing a list of all the packages I install in `3_install.sh`. That way, I can add/delete packages without needing to touch the actual script.
+
