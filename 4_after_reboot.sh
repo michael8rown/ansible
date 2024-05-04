@@ -8,6 +8,7 @@
   vars_files:
     - ext.yml 
     - vars.yml
+    - d.yml
 
   tasks:
     - name: Check if GNOME Shell is running
@@ -85,3 +86,19 @@
         dest: /usr/share/backgrounds/ansible-wallpaper.jpg
         owner: root
         group: root
+
+    - name: Read dconf settings from file
+      set_fact:
+        settings: "{{ lookup('file', 'd.yml') | from_yaml }}"
+
+    - name: Turn that list of settings into an array
+      set_fact:
+        dconf_settings: "{{ settings | dict2items | list }}"
+
+    - name: Set the dconf settings
+      become_user: "{{ gnome_user }}"
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items: "{{ dconf_settings }}"
+      ignore_errors: true
