@@ -22,11 +22,11 @@ git clone https://www.github.com/michael8rown/ansible
 
 `1_pre_install.sh` does some of the usual housekeeping I perform before beginning, such as checking internet connection and running `timedatectl`. Checking internet is actually unncessary because, if you didn't have an internet connection, you would not have been able to install `git` above.
 
-You are also instructed to format the disk using `cfdisk /dev/disk`, and you are given a recommended sturcture. The pattern I always use is
+You are also instructed to format the disk using `cfdisk /dev/disk`, and you are given a recommended structure. The pattern I always use is
 
 * an EFI boot device at `/dev/vda1`
 * a root device at `/dev/vda2`
-* and a swap device `/dev/vda3`
+* and a swap device at `/dev/vda3`
 
 ### Step 2: Base Installation
 
@@ -55,9 +55,7 @@ Once this step is complete, you must reboot.
 
 ### Final step
 
-The last step is to reboot again, after which your environment should be set up exactly as defined in the scripts.
-
-Enjoy :-)
+The last step is to reboot again, after which your environment should be set up exactly as defined in the scripts. Enjoy :-)
 
 ### Todo
 
