@@ -30,13 +30,13 @@ git clone https://github.com/michael8rown/archinstall.git
 You are also instructed to format the disk using (for example) `cfdisk /dev/vda`, and you are offered a recommended structure. The pattern I always use is:
 
 * select `gpt` as the label
-* create an EFI boot device at `/dev/vda1`
-* create a root device at `/dev/vda2`
-* and create a swap device at `/dev/vda3`
+* create a 1GB EFI `boot` partition
+* create a 17GB `root` partition
+* and create a 2GB `swap` partition
 
 ### Step 2: Base Installation
 
-Before continuing, run `lsblk` and note the names of the partitions you created at the end of **Step 1**. The output will look something like this:
+Before continuing, run `lsblk` and note the device locations of the partitions you created at the end of **Step 1**. The output will look something like this:
 
 ```
 $ lsblk
@@ -50,17 +50,17 @@ vda    254:0    0    20G  0 disk
 └─vda3 254:3    0     2G  0 part 
 ```
 
-Make note of device names you've assigned because you will be asked for those details when you run `2_base_install.sh`. Using the examples above, 
+Make note of those device names because you will be asked for those details when you run `2_base_install.sh`. Using the example above, 
 
-* `/dev/vda1` is the `boot` parition
-* `/dev/vda2` is the `root` parition
-* `/dev/vda3` is the `swap` parition
+* `/dev/vda1` is our `boot` parition
+* `/dev/vda2` is our `root` parition
+* `/dev/vda3` is our `swap` parition
 
 Once you've collected this information, run `2_base_install.sh` to perform some pre-chroot tasks, such as
 
 * formatting and mounting the devices
 * running `pacstrap`
-* chrooting into /mnt
+* chrooting into `/mnt`
 
 ### Step 3: Main Installation
 
