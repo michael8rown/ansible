@@ -1,11 +1,8 @@
 #!/bin/bash
-
 set -e -o pipefail
 
 read -p "What is the root device? " rootdev
-
 read -p "What is the boot device? " bootdev
-
 read -p "What is the swap device? " swapdev
 
 echo "Making the filesystems and activing swap ..."
@@ -28,7 +25,7 @@ echo "Generating fstab ..."
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "Copying install scripts to /mnt ..."
-cp * /mnt/.
+cp -r * /mnt/.
 
 echo "Base installation is complete. Entering chroot enviroment in 10 seconds. Continue installation with 3_install.sh."
 
