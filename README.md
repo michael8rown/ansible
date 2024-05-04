@@ -30,7 +30,7 @@ You are also instructed to format the disk using `cfdisk /dev/disk`, and you are
 
 ### Step 2: Base Installation
 
-`2_install.sh` performs some pre-chroot tasks, such as
+`2_base_install.sh` performs some pre-chroot tasks, such as
 
 * formatting and mounting the devices
 * running `pacstrap`
@@ -38,10 +38,11 @@ You are also instructed to format the disk using `cfdisk /dev/disk`, and you are
 
 ### Step 3: Main Installation
 
-Inside the chroot environment, run `3_install.sh`. This will
+Inside the chroot environment, `cd` into the `ansible` directory and run `3_main_install.sh`. This will
 
 * install all the packages I like
 * enable all the services I use
+* disable Wayland (is Wayland EVER going to figure out how to handle cursors?)
 * set the root password
 * create a new user
 * set that user's password
@@ -51,7 +52,7 @@ Once this step is complete, you must reboot.
 
 ### Step 4: Post-installation tasks
 
-`4_after_reboot.sh` is an Ansible playbook that configures all the things the way I like them: GNOME extensions, WhiteSur icons, and setting all my desktop preferences.
+Once you log in, `cd` into the `ansible` directory and run `4_post_install.sh`, which is an Ansible playbook that configures all the things the way I like them: GNOME extensions, WhiteSur icons, and setting all my desktop preferences.
 
 ### Final step
 
@@ -59,6 +60,6 @@ The last step is to reboot again, after which your environment should be set up 
 
 ### Todo
 
-- [ ] Create a separate file containing a list of all the packages I install in `3_install.sh`. That way, I can add/delete packages without needing to touch the actual script.
+- [ ] Create a separate file containing a list of all the packages I install in `3_main_install.sh`. That way, I can add/delete packages without needing to touch the actual script.
 
 - [ ] Write some Ansible templates to set up and activate some local services I've written
