@@ -1,12 +1,12 @@
 #!/usr/bin/ansible-playbook --ask-become-pass
 ---
-- name: Install and Enable/Disable GNOME Shell extensions
+- name: Install and Enable GNOME extensions
   hosts: localhost
   become: true
   gather_facts: yes
 
   vars_files:
-    - ext.yml  # Include the extensions configuration file
+    - ext.yml 
     - vars.yml
 
   tasks:
@@ -25,7 +25,7 @@
       set_fact:
         extensions: "{{ lookup('file', 'ext.yml') | from_yaml }}"
 
-    - name: Get a list of extensions to enable
+    - name: Make that list into an array of extensions to enable
       set_fact:
         extensions_to_install: "{{ extensions | dict2items | map(attribute='value') | list }}"
 
@@ -38,7 +38,7 @@
       set_fact:
         gnome_shell_major_version: "{{ gnome_shell_version.stdout.split()[-1].split('.')[0] }}"
 
-    - name: Install and enable GNOME Shell extensions
+    - name: Install GNOME Shell extensions
       include_role:
         name: install_extensions
       with_items: "{{ extensions_to_install }}"

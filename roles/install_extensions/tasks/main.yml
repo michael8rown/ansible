@@ -1,6 +1,6 @@
-- name: Debug
-  debug:
-    msg: "extension name {{ item }} will be installed for {{ user }} under shell version {{ shell_version }}"
+#- name: Debug
+#  debug:
+#    msg: "extension name {{ item }} will be installed for {{ user }} under shell version {{ shell_version }}"
 
 - name: Set Extension name
   set_fact:
