@@ -36,7 +36,7 @@ Before continuing, run `lsblk` and note the names of the partitions you created 
 example
 ```
 
-Make note of device names you've assigned becuase you will be asked for those details when you run `2_base_install.sh`. For example, in the above example, 
+Make note of device names you've assigned becuase you will be asked for those details when you run `2_base_install.sh`. Using the example above, 
 
 * `/dev/vda1` is the `boot` parition
 * `/dev/vda2` is the `root` parition
