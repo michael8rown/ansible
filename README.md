@@ -1,6 +1,6 @@
 # Arch Linux Installation and Configuration
 
-This is a collection of BASH and Ansible scripts to automate the installation of Arch Linux, install/enable GNOME extensions, install WhiteSur icons, and set a number of dconf settings the way I like them.
+This is a collection of BASH and Ansible scripts to automate the installation of Arch Linux in UEFI mode, install/enable GNOME extensions, install WhiteSur icons, and set a number of dconf settings the way I like them.
 
 This is my first attempt at reproducing my NixOS experience in Arch. It isn't quite as flawless, but it's very close.
 
@@ -23,13 +23,26 @@ git clone https://github.com/michael8rown/archinstall.git
 
 You are also instructed to format the disk using `cfdisk /dev/disk`, and you are offered a recommended structure. The pattern I always use is
 
-* an EFI boot device at `/dev/vda1`
-* a root device at `/dev/vda2`
-* and a swap device at `/dev/vda3`
+* select `gpt` as the format
+* create an EFI boot device at `/dev/vda1`
+* create a root device at `/dev/vda2`
+* and create a swap device at `/dev/vda3`
 
 ### Step 2: Base Installation
 
-`2_base_install.sh` performs some pre-chroot tasks, such as
+Before continuing, run `lsblk` and note the names of the partitions you created at the end of *Step 1*. The output will look something like this:
+
+```
+example
+```
+
+Make note of device names you've assigned becuase you will be asked for those details when you run `2_base_install.sh`. For example, in the above example, 
+
+* `/dev/vda1` is the `boot` parition
+* `/dev/vda2` is the `root` parition
+* `/dev/vda3` is the `swap` parition
+
+Once you've collected this information, run `2_base_install.sh` to perform some pre-chroot tasks, such as
 
 * formatting and mounting the devices
 * running `pacstrap`
