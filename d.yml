@@ -22,6 +22,7 @@
 "/org/gnome/gedit/preferences/editor/wrap-mode": "'word'"
 "/org/gnome/gedit/preferences/ui/bottom-panel-visible": "false"
 "/org/gnome/gedit/preferences/ui/side-panel-visible": "false"
+"/org/gnome/gedit/preferences/ui/theme-variant": "'dark'"
 "/org/gnome/nautilus/icon-view/default-zoom-level": "'large'"
 "/org/gnome/nautilus/preferences/default-folder-viewer": "'icon-view'"
 "/org/gnome/nautilus/preferences/show-image-thumbnails": "'always'"

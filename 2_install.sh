@@ -18,6 +18,9 @@ mount -o umask=0077 --mkdir $bootdev /mnt/boot
 
 sleep 1
 
+sed -i 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+sed -i 's/#Color/Color/' /etc/pacman.conf
+
 echo "Installing base system ..."
 pacstrap -K /mnt linux-lts linux-lts-headers linux-firmware amd-ucode base base-devel reflector git ansible ansible-core openssh nano which sudo bash-completion man-db
 
@@ -25,10 +28,16 @@ echo "Generating fstab ..."
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "Copying install scripts to /mnt ..."
-cp -r * /mnt/.
+cp -r ../ansible /mnt/.
 
-echo "Base installation is complete. Entering chroot enviroment in 10 seconds. Continue installation with 3_install.sh."
+echo "Base installation is complete."
+echo "Continue installation with /ansible/3_install.sh."
 
-sleep 10
+secs=$((10))
+while [ $secs -gt 0 ]; do
+   echo -ne "  Entering chroot environment in > $secs\033[0K\r"
+   sleep 1
+   : $((secs--))
+done
 
 arch-chroot /mnt

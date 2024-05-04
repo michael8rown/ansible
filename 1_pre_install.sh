@@ -13,7 +13,7 @@ ping -c 3 archlinux.org
 
 timedatectl
 
-echo "Now you must partition the drive. Once that's complete, run 2_install.sh"
+echo "Now you must partition the drive. Once that's complete, run /ansible/2_install.sh"
 
 echo "Example partition setup:
 

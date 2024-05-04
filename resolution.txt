@@ -1,0 +1,3 @@
+
+/org/gnome/control-center/window-state
+  (980, 640, false)
