@@ -75,7 +75,7 @@ Inside the chroot environment, `cd` into the `archinstall` directory and run `3_
 * set that user's password
 * add that user to sudo
 
-Once this step is complete, you must reboot.
+Once this step is complete, you must `reboot`.
 
 ### Step 4: Post-installation tasks
 
@@ -83,7 +83,7 @@ Once you log in, `cd` into the `archinstall` directory and run `4_post_install.s
 
 ### Step 5: Reboot
 
-The last step is to reboot again, after which your environment should be set up exactly as defined in the scripts. Enjoy!
+The last step is to `reboot` again, after which your environment should be set up exactly as defined in the scripts. Enjoy!
 
 ### Todo
 
@@ -91,5 +91,5 @@ The last step is to reboot again, after which your environment should be set up 
 
 - [ ] Write some Ansible templates to set up and activate some local services I've written
 
-- [ ] Automate disk partitioning? Can that even be done in `cfdisk`, or would I have to revert to something simpler, like `fdisk`?
+- [ ] Automate disk partitioning
 
