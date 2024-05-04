@@ -24,15 +24,14 @@ sleep 1
 echo "Installing base system ..."
 pacstrap -K /mnt linux-lts linux-lts-headers linux-firmware amd-ucode base base-devel reflector git ansible ansible-core openssh nano which sudo bash-completion man-db
 
-
 echo "Generating fstab ..."
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "Copying install scripts to /mnt ..."
 cp * /mnt/.
 
-echo "Entering the chroot environment ..."
+echo "Base installation is complete. Entering chroot enviroment in 10 seconds. Continue installation with 3_install.sh."
+
+sleep 10
+
 arch-chroot /mnt
-
-echo "Base installation is complete. Continue with the next script."
-

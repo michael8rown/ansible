@@ -1,6 +1,6 @@
 #!/usr/bin/ansible-playbook --ask-become-pass
 ---
-- name: Install and Enable GNOME extensions
+- name: Install/Enable extensions, install icons, and copy wallpaper
   hosts: localhost
   become: true
   gather_facts: yes
@@ -50,8 +50,8 @@
       command: /usr/bin/glib-compile-schemas .
       become_user: "{{ gnome_user }}"
       args:
-        chdir: /home/michael/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas
-        creates: /home/michael/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas/gschemas.compiled
+        chdir: "/home/{{ gnome_user }}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas"
+        creates: /home/{{ gnome_user }}/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/schemas/gschemas.compiled
 
     - name: Enable extensions
       become_user: "{{ gnome_user }}"
@@ -67,5 +67,21 @@
 #      command: gdbus call --session --dest org.gnome.Shell.Extensions --object-path /org/gnome/Shell/Extensions --method org.gnome.Shell.Extensions.InstallRemoteExtension "{{ item }}"
 #      become_user: "{{ gnome_user }}"
 #      with_items: "{{ extensions_to_install }}"
-3      ignore_errors: true
+#      ignore_errors: true
 
+    - name: Clone WhiteSur git repo
+      become_user: "{{ gnome_user }}"
+      ansible.builtin.git:
+        repo: https://github.com/vinceliuice/WhiteSur-icon-theme.git
+        dest: /home/{{ gnome_user }}/Downloads/WhiteSur-icon-theme
+
+    - name: Install WhiteSur icons
+      become_user: "{{ gnome_user }}"
+      command: "/home/{{ gnome_user }}/Downloads/WhiteSur-icon-theme/install.sh"
+
+    - name: copy wallpaper file
+      copy:
+        src: files/wallpaper.jpg
+        dest: /usr/share/backgrounds/ansible-wallpaper.jpg
+        owner: root
+        group: root
