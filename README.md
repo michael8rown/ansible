@@ -85,11 +85,11 @@ Once you log in, `cd` into the `archinstall` directory and run `4_post_install.s
 
 The last step is to `reboot` again, after which your environment should be set up exactly as defined in the scripts. Enjoy!
 
-### Todo
+### TODO
 
 - [x] Create a separate file containing a list of all the packages I install in `3_main_install.sh`. That way, I can add/delete packages without needing to touch the actual script.
 
 - [ ] Write some Ansible templates to set up and activate some local services I've written
 
-- [ ] Automate disk partitioning
+- [ ] Automate disk partitioning **NOTE** a test version of this task (`disk.sh`) is included here but it is not complete and should be used with great caution. It is extremely destructive. **USE AT YOUR OWN RISK!!**
 
