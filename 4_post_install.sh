@@ -11,16 +11,16 @@
     - d.yml
 
   tasks:
-    - name: Check if GNOME Shell is running
-      command: "pgrep -u {{ ansible_env.SUDO_USER }} gnome-shell"
-      register: gnome_shell_pid
-      ignore_errors: true
-      changed_when: false
+#    - name: Check if GNOME Shell is running
+#      command: "pgrep -u {{ ansible_env.SUDO_USER }} gnome-shell"
+#      register: gnome_shell_pid
+#      ignore_errors: true
+#      changed_when: false
 
-    - name: Ensure GNOME Shell is running
-      fail:
-        msg: "GNOME Shell is not running"
-      when: gnome_shell_pid.rc != 0
+#    - name: Ensure GNOME Shell is running
+#      fail:
+#        msg: "GNOME Shell is not running"
+#      when: gnome_shell_pid.rc != 0
 
     - name: Read extensions from file
       set_fact:

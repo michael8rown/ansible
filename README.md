@@ -75,15 +75,13 @@ Inside the chroot environment, `cd` into the `archinstall` directory and run `3_
 * set that user's password
 * add that user to sudo
 
-Once this step is complete, you must `reboot`.
-
 ### Step 4: Post-installation tasks
 
-Once you log in, `cd` into the `archinstall` directory and run `4_post_install.sh`, which is an Ansible playbook that configures all the things the way I like them: GNOME extensions, WhiteSur icons, and setting all my desktop preferences.
+Finally, run `4_post_install.sh`, which is an Ansible playbook that configures all the things the way I like them: GNOME extensions, WhiteSur icons, and setting all my desktop preferences.
 
 ### Step 5: Reboot
 
-The last step is to `reboot` again, after which your environment should be set up exactly as defined in the scripts. Enjoy!
+The last step is to `reboot`, after which your environment should be set up exactly as defined in the scripts. Enjoy!
 
 ### TODO
 
