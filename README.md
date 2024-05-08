@@ -16,7 +16,7 @@ The first step is to boot the installation iso. Once booted, you will need to in
 
 ```
 pacman-key --init
-sudo pacman -Sy git
+pacman -Sy git
 ```
 
 Once installed, clone this repo with
@@ -56,14 +56,11 @@ Make note of those device names because you will be asked for those details when
 * `/dev/vda2` is our `root` parition
 * `/dev/vda3` is our `swap` parition
 
-Once you've collected this information, run `2_base_install.sh` to perform some pre-chroot tasks, such as
+Once you've collected this information, run `2_base_install.sh` which will automatically perform the following tasks:
 
-* formatting and mounting the devices
-* running `pacstrap`
-* chrooting into `/mnt` and running /archinstall/3_main_install.sh
-
-Inside the chroot environment, `3_main_install.sh` will
-
+* format and mount the devices
+* run `pacstrap`
+* `arch-chroot` into `/mnt` to `/archinstall/3_main_install.sh`, which will
 * install all the packages I like (you can edit `apps.txt` to add/delete packages of your choice. **NOTE:** some of the tasks/services in these scripts depend on certain packages. For example, this script enables NetworkManager. If you choose not to install NetworkManager, the script will fail.)
 * enable all the services I use
 * disable Wayland (is Wayland ***ever*** going to figure out how to handle cursors?)
@@ -72,16 +69,11 @@ Inside the chroot environment, `3_main_install.sh` will
 * create a new user
 * set that user's password
 * add that user to sudo
+* run `/archinstall/4_post_install_sh` to complete installation (this is the Ansible playbook)
 
-### Step 3: Post-installation tasks
+### Step 3: Reboot
 
-**Note: Must `arch-chroot /mnt` and then `cd archinstall` before proceeding. Hoping to integrate this into Step 2, but haven't yet.**
-
-Finally, run `4_post_install.sh`, which is an Ansible playbook that configures all the things the way I like them: GNOME extensions, WhiteSur icons, and setting all my desktop preferences.
-
-### Step 4: Reboot
-
-The last step is to `reboot`, after which your environment should be set up exactly as defined in the scripts. Enjoy!
+Provided there were no errors along the way, the last step is to `umount -a && reboot`, after which your environment should be set up exactly as defined in the scripts. Enjoy!
 
 ### TODO
 
