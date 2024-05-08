@@ -89,7 +89,7 @@
 
     - name: Read dconf settings from file
       set_fact:
-        settings: "{{ lookup('file', 'd.yml') | from_yaml }}"
+        settings: "{{ lookup('file', 'dconf.yml') | from_yaml }}"
 
     - name: Turn that list of settings into an array
       set_fact:
