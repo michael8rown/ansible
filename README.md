@@ -60,11 +60,9 @@ Once you've collected this information, run `2_base_install.sh` to perform some 
 
 * formatting and mounting the devices
 * running `pacstrap`
-* chrooting into `/mnt`
+* chrooting into `/mnt` and running /archinstall/3_main_install.sh
 
-### Step 3: Main Installation
-
-Inside the chroot environment, `cd` into the `archinstall` directory and run `3_main_install.sh`. This will
+Inside the chroot environment, `3_main_install.sh` will
 
 * install all the packages I like (you can edit `apps.txt` to add/delete packages of your choice. **NOTE:** some of the tasks/services in these scripts depend on certain packages. For example, this script enables NetworkManager. If you choose not to install NetworkManager, the script will fail.)
 * enable all the services I use
@@ -75,11 +73,13 @@ Inside the chroot environment, `cd` into the `archinstall` directory and run `3_
 * set that user's password
 * add that user to sudo
 
-### Step 4: Post-installation tasks
+### Step 3: Post-installation tasks
+
+**Note: Must `arch-chroot /mnt` and then `cd archinstall` before proceeding. Hoping to integrate this into Step 2, but haven't yet.**
 
 Finally, run `4_post_install.sh`, which is an Ansible playbook that configures all the things the way I like them: GNOME extensions, WhiteSur icons, and setting all my desktop preferences.
 
-### Step 5: Reboot
+### Step 4: Reboot
 
 The last step is to `reboot`, after which your environment should be set up exactly as defined in the scripts. Enjoy!
 
