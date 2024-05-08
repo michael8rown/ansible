@@ -104,4 +104,10 @@
       ignore_errors: true
 
     - name: Display final message
-      command: "/archinstall/5_success.sh"
+      debug:
+        msg:
+          - 'Success!!'
+          - 'If you see this message, it means installation was successful.'
+          - 'Now you must unmount partitions, reboot, and'
+          - 'enjoy!'
+

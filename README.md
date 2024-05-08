@@ -65,7 +65,7 @@ Once you are prepared to provide this information, run `2_base_install.sh` which
 
 ### Step 3: Reboot
 
-Provided there were no errors along the way, the last step is to `umount -a && reboot`, after which your environment should be set up exactly as defined in the scripts. Enjoy!
+Provided there were no errors along the way, the last step is to unmount partitions and reboot, after which your environment should be set up exactly as defined in the scripts. Enjoy!
 
 ### TODO
 
