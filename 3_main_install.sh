@@ -27,7 +27,7 @@ sleep .5
 
 echo "Installing the rest of the system ..."
 
-apps=`echo $(cat apps.txt)`
+apps=`echo $(cat /archinstall/apps.txt)`
 
 pacman -Syu --noconfirm ${apps}
 
@@ -102,7 +102,7 @@ echo "Adding ${username} to sudoers ..."
 echo "%wheel ALL=(ALL:ALL) ALL" | (EDITOR="tee -a" visudo)
 
 echo "Moving archinstall files to ${username}'s home directory ..."
-cp -r ../archinstall /home/${username}/.
+cp -r archinstall /home/${username}/.
 
 echo "Updating permissions on archinstall folder ..."
 chown -R ${username}:${username} /home/${username}/archinstall
@@ -113,3 +113,5 @@ echo "Installation should be complete."
 echo "You should now exit the chroot environment, unmount devices, and reboot."
 echo "Once rebooted, run the script called"
 echo "  >>  /home/${username}/archinstall/4_after_reboot.sh"
+
+

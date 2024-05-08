@@ -31,15 +31,14 @@ echo "Copying install scripts to /mnt ..."
 cp -r ../archinstall /mnt/.
 
 echo "Base installation is complete."
-echo "Continue installation with /archinstall/3_install.sh."
+echo "Now entering chroot to run /archinstall/3_main_install.sh ..."
 
-secs=$((10))
-while [ $secs -gt 0 ]; do
-   echo -ne "  Entering chroot environment in > $secs\033[0K\r"
-   sleep 1
-   : $((secs--))
-done
+#secs=$((10))
+#while [ $secs -gt 0 ]; do
+#   echo -ne "  Entering chroot environment in > $secs\033[0K\r"
+#   sleep 1
+#   : $((secs--))
+#done
+#echo
 
-echo
-
-arch-chroot /mnt
+arch-chroot /mnt /archinstall/3_main_install.sh
