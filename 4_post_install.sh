@@ -8,7 +8,7 @@
   vars_files:
     - ext.yml
     - vars.yml
-    - d.yml
+    - dconf.yml
 
   tasks:
 #    - name: Check if GNOME Shell is running
@@ -102,3 +102,6 @@
         value: "{{ item.value }}"
       with_items: "{{ dconf_settings }}"
       ignore_errors: true
+
+    - name: Display final message
+      command: "/archinstall/5_success.sh"

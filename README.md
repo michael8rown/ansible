@@ -27,40 +27,28 @@ git clone https://github.com/michael8rown/archinstall.git
 
 `1_pre_install.sh` does some of the usual housekeeping I perform before beginning, such as checking internet connection and running `timedatectl`.
 
-You are also instructed to format the disk using (for example) `cfdisk /dev/vda`, and you are offered a recommended structure. The pattern I always use is:
+You are also instructed to format the disk using (for example) `cfdisk /dev/vda`, and you are offered a recommended structure. The pattern used in this example is:
 
 * select `gpt` as the label
-* create a 1GB EFI `boot` partition
-* create a 17GB `root` partition
-* and create a 2GB `swap` partition
+* create a 1GB EFI `boot` partition (e.g.,` /dev/vda1`)
+* create a 17GB `root` partition (`/dev/vda2`)
+* and create a 2GB `swap` partition (`/dev/vda3`)
 
-### Step 2: Base Installation
+### Step 2: Installation
 
-Before continuing, run `lsblk` and note the device locations of the partitions you created at the end of **Step 1**. The output will look something like this:
+`2_base_install.sh` expects you to provide certain information:
 
-```
-$ lsblk
+* the partition names created at the end of **Step 1** above (e.g. `/dev/vda1`, etc.)
+* a hostname (e.g. `archtest`)
+* a root password
+* a new user name
+* and a password for that user
 
-NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
-loop0    7:0    0 788.2M  1 loop /run/archiso/airootfs
-sr0     11:0    1 955.3M  0 rom  /run/archiso/bootmnt
-vda    254:0    0    20G  0 disk 
-├─vda1 254:1    0     1G  0 part 
-├─vda2 254:2    0    17G  0 part 
-└─vda3 254:3    0     2G  0 part 
-```
-
-Make note of those device names because you will be asked for those details when you run `2_base_install.sh`. Using the example above, 
-
-* `/dev/vda1` is our `boot` parition
-* `/dev/vda2` is our `root` parition
-* `/dev/vda3` is our `swap` parition
-
-Once you've collected this information, run `2_base_install.sh` which will automatically perform the following tasks:
+Once you are prepared to provide this information, run `2_base_install.sh` which will automatically perform the following tasks:
 
 * format and mount the devices
 * run `pacstrap`
-* `arch-chroot` into `/mnt` to `/archinstall/3_main_install.sh`, which will
+* `arch-chroot` into `/mnt` to run `/archinstall/3_main_install.sh`, which will
 * install all the packages I like (you can edit `apps.txt` to add/delete packages of your choice. **NOTE:** some of the tasks/services in these scripts depend on certain packages. For example, this script enables NetworkManager. If you choose not to install NetworkManager, the script will fail.)
 * enable all the services I use
 * disable Wayland (is Wayland ***ever*** going to figure out how to handle cursors?)
@@ -69,7 +57,11 @@ Once you've collected this information, run `2_base_install.sh` which will autom
 * create a new user
 * set that user's password
 * add that user to sudo
-* run `/archinstall/4_post_install_sh` to complete installation (this is the Ansible playbook)
+* run `/archinstall/4_post_install_sh`, an Ansible playbook that will
+* download, install, and enable the GNOME extensions listed in `ext.yml` (edit this as you please, but note that one Ansible task expects Blur My Shell to be installed. If you don't wish to install that extension, be sure to remove that task from the playbook)
+* download and install [vinceliuice's amazing WhiteSur icons](https://github.com/vinceliuice/WhiteSur-icon-theme)
+* copy and set the wallpaper from this repo
+* and set a long list of dconf settings the way I like them (these are contained in `dconf.yml`; feel free to add/remove settings as you see fit)
 
 ### Step 3: Reboot
 
